@@ -1,0 +1,28 @@
+replicaCount: 1
+image:
+  repository: surkis
+  tag: v1.0.0-ccedbe1
+  arch: arm64
+secret:
+  name: kbot
+  env: TELE_TOKEN
+  key: token
+securityContext:
+  privileged: true
+serviceAccount:
+  create: false
+  automount: true
+  annotations: {}
+  name: ""
+autoscaling:
+  enabled: false
+imagePullSecrets: []
+podAnnotations: {}
+podLabels: {}
+podSecurityContext: {}
+resources: {}
+volumes: []
+volumeMounts: []
+nodeSelector: {}
+tolerations: []
+affinity: {}
