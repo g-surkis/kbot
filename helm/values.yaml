@@ -1,7 +1,7 @@
 replicaCount: 1
 image:
   repository: surkis
-  tag: v1.0.0-ccedbe1
+  tag: v1.0.1-ea0fca1
   arch: arm64
 secret:
   name: kbot
