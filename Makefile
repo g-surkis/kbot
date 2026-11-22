@@ -1,6 +1,7 @@
 APP=$(shell basename -s .git $(shell git remote get-url origin))
 # REGISTRY=surkis
-REGISTRY ?= europe-west1-docker.pkg.dev/platinum-lead-247818/demo-repo
+# REGISTRY ?= europe-west1-docker.pkg.dev/platinum-lead-247818/demo-repo
+REGISTRY ?= ghcr.io/g-surkis
 VERSION=$(shell git describe --tags --abbrev=0)-$(shell git rev-parse --short HEAD)
 TARGETARCH=$(shell go env GOARCH)
 TARGETOS=${shell go env GOOS}

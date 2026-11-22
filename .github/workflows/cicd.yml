@@ -19,12 +19,18 @@ jobs:
       - name: Run test
         run: make test
 
-      - name: Login to Artifact Registry
+      # - name: Login to Artifact Registry
+      #   uses: docker/login-action@v3
+      #   with:
+      #     registry: europe-west1-docker.pkg.dev
+      #     username: _json_key
+      #     password: ${{ secrets.GCP_SA_KEY }}
+      - name: Login to ghcr.io
         uses: docker/login-action@v3
         with:
-          registry: europe-west1-docker.pkg.dev
-          username: _json_key
-          password: ${{ secrets.GCP_SA_KEY }}
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build & Push
         run: make image push

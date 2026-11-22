@@ -3,9 +3,15 @@ replicaCount: 1
 #   repository: surkis
 #   tag: v1.0.0-ccedbe1
 #   arch: arm64
+# image:
+#   registry: "europe-west1-docker.pkg.dev"
+#   repository: "platinum-lead-247818/demo-repo/kbot"
+#   tag: "v1.0.1-a7b9568"
+#   os: linux
+#   arch: amd64
 image:
-  registry: "europe-west1-docker.pkg.dev"
-  repository: "platinum-lead-247818/demo-repo/kbot"
+  registry: "ghcr.io"
+  repository: "g-surkis/kbot"
   tag: "v1.0.1-a7b9568"
   os: linux
   arch: amd64
