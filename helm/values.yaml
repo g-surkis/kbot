@@ -6,7 +6,7 @@ replicaCount: 1
 image:
   registry: "europe-west1-docker.pkg.dev"
   repository: "platinum-lead-247818/demo-repo/kbot"
-  tag: "v1.0.1-793c1e6"
+  tag: "v1.0.1-a7b9568"
   os: linux
   arch: amd64
 secret:
