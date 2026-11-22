@@ -13,8 +13,12 @@ get:
 build: format get
 	CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -v -o kbot -ldflags "-X="github.com/g-surkis/kbot/cmd.appVersion=${VERSION}
 
+# image:
+# 	docker build . -t ${REGISTRY}/${APP}:${VERSION}-${TARGETARCH}
+
 image:
-	docker build . -t ${REGISTRY}/${APP}:${VERSION}-${TARGETARCH}
+	docker buildx build --platform ${PLATFORMS} \
+		-t ${REGISTRY}/${APP}:${VERSION} --push .
 
 push:
 	docker push ${REGISTRY}/${APP}:${VERSION}-${TARGETARCH}
