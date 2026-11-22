@@ -4,6 +4,8 @@ VERSION=$(shell git describe --tags --abbrev=0)-$(shell git rev-parse --short HE
 TARGETARCH=$(shell go env GOARCH)
 TARGETOS=${shell go env GOOS}
 
+ARCH=$(lastword $(subst /, ,${PLATFORMS}))
+
 format:
 	gofmt -s -w ./
 
@@ -18,7 +20,7 @@ build: format get
 
 image:
 	docker buildx build --platform ${PLATFORMS} \
-		-t ${REGISTRY}/${APP}:${VERSION} --push .
+		-t ${REGISTRY}/${APP}:${VERSION}-${ARCH} --push .
 
 push:
 	docker push ${REGISTRY}/${APP}:${VERSION}-${TARGETARCH}
