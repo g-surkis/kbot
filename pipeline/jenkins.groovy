@@ -7,7 +7,7 @@ kind: Pod
 spec:
   containers:
   - name: golang
-    image: golang:1.23
+    image: golang:1.27.3
     command: [cat]
     tty: true
 '''
