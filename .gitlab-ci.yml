@@ -1,21 +1,28 @@
+spec:  
+  inputs:
+    os:
+      default: "linux"
+      options: ["linux", "darwin", "windows"]
+      description: "Target operating system"
+    arch:
+      default: "amd64"
+      options: ["amd64", "arm64"]
+      description: "Target architecture"
+    skip_tests:
+      default: "false"
+      options: ["true", "false"]
+      description: "Skip running tests"
+    skip_lint:
+      default: "false"
+      options: ["true", "false"]
+      description: "Skip running linter"
+
 variables:
   GIT_DEPTH: 0
-  OS:
-    value: "linux"
-    options: ["linux", "darwin", "windows"]
-    description: "Target operating system"
-  ARCH:
-    value: "amd64"
-    options: ["amd64", "arm64"]
-    description: "Target architecture"
-  SKIP_TESTS:
-    value: "false"
-    options: ["true", "false"]
-    description: "Skip running tests"
-  SKIP_LINT:
-    value: "false"
-    options: ["true", "false"]
-    description: "Skip running linter"
+  OS: "$[[ inputs.os ]]"
+  ARCH: "$[[ inputs.arch ]]"
+  SKIP_TESTS: "$[[ inputs.skip_tests ]]"
+  SKIP_LINT: "$[[ inputs.skip_lint ]]"
 
 default:
   image: golang:1.27.3
