@@ -1,0 +1,53 @@
+variables:
+  GIT_DEPTH: 0
+  OS:
+    value: "linux"
+    options: ["linux", "darwin", "windows"]
+    description: "Target operating system"
+  ARCH:
+    value: "amd64"
+    options: ["amd64", "arm64"]
+    description: "Target architecture"
+  SKIP_TESTS:
+    value: "false"
+    options: ["true", "false"]
+    description: "Skip running tests"
+  SKIP_LINT:
+    value: "false"
+    options: ["true", "false"]
+    description: "Skip running linter"
+
+default:
+  image: golang:1.27.3
+  before_script:
+    - export PATH="$PATH:$(go env GOPATH)/bin"
+    - which make || (apt-get update -qq && apt-get install -y -qq make)
+    - which golint || go install golang.org/x/lint/golint@latest
+
+stages:
+  - lint
+  - test
+  - build
+
+lint-app:
+  stage: lint
+  script: make lint
+  rules:
+    - if: $SKIP_LINT == "true"
+      when: never
+    - when: on_success
+
+test-app:
+  stage: test
+  script: make test
+  rules:
+    - if: $SKIP_TESTS == "true"
+      when: never
+    - when: on_success
+
+build-app:
+  stage: build
+  script: make build TARGETOS=$OS TARGETARCH=$ARCH
+  artifacts:
+    paths:
+      - kbot
